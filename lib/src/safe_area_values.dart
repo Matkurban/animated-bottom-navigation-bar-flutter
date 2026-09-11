@@ -5,10 +5,5 @@ class SafeAreaValues {
   final bool right;
   final bool bottom;
 
-  const SafeAreaValues({
-    this.left = true,
-    this.top = true,
-    this.right = true,
-    this.bottom = true,
-  });
+  const SafeAreaValues({this.left = true, this.top = true, this.right = true, this.bottom = true});
 }

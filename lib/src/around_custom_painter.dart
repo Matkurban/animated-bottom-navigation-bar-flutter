@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class AroundCustomPainter extends StatelessWidget {
@@ -42,12 +42,7 @@ class _AroundCustomPainter extends CustomPainter {
   final double borderWidth;
   final Color borderColor;
 
-  _AroundCustomPainter({
-    required this.borderColor,
-    required this.borderWidth,
-    required this.clipper,
-    this.shadow,
-  });
+  _AroundCustomPainter({required this.borderColor, required this.borderWidth, required this.clipper, this.shadow});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -61,10 +56,11 @@ class _AroundCustomPainter extends CustomPainter {
     final shadowPaint = shadow?.toPaint();
 
     if (size.height != 0) {
-      if (borderPaint.color.value != Colors.transparent.value) {
+      // 方式 1：直接通过 .a (alpha通道) 判断是否透明，效率更高且符合直觉
+      if (borderPaint.color.a != 0) {
         canvas.drawPath(clipPath, borderPaint);
       }
-      if (shadow != null && shadow!.color.value != Colors.transparent.value) {
+      if (shadow != null && shadow!.color.a != 0) {
         canvas.drawPath(clipPath.shift(shadow!.offset), shadowPaint!);
       }
     }

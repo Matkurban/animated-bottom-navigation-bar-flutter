@@ -68,16 +68,18 @@ class CircularNotchedAndCorneredRectangle extends NotchedShape {
     if (guestCenterDx == halfOfHostWidth) {
       if (gapLocation == GapLocation.end) {
         throw GapLocationException(
-            'Wrong gap location in $AnimatedBottomNavigationBar towards FloatingActionButtonLocation => '
-            'consider use ${GapLocation.center} instead of $gapLocation or change FloatingActionButtonLocation');
+          'Wrong gap location in $AnimatedBottomNavigationBar towards FloatingActionButtonLocation => '
+          'consider use ${GapLocation.center} instead of $gapLocation or change FloatingActionButtonLocation',
+        );
       }
     }
 
     if (guestCenterDx != halfOfHostWidth) {
       if (gapLocation == GapLocation.center) {
         throw GapLocationException(
-            'Wrong gap location in $AnimatedBottomNavigationBar towards FloatingActionButtonLocation => '
-            'consider use ${GapLocation.end} instead of $gapLocation or change FloatingActionButtonLocation');
+          'Wrong gap location in $AnimatedBottomNavigationBar towards FloatingActionButtonLocation => '
+          'consider use ${GapLocation.end} instead of $gapLocation or change FloatingActionButtonLocation',
+        );
       }
     }
 
@@ -137,11 +139,7 @@ class CircularNotchedAndCorneredRectangle extends NotchedShape {
       )
       ..lineTo(p[0].dx, p[0].dy)
       ..quadraticBezierTo(p[1].dx, p[1].dy, p[2].dx, p[2].dy)
-      ..arcToPoint(
-        p[3],
-        radius: Radius.circular(notchRadius),
-        clockwise: false,
-      )
+      ..arcToPoint(p[3], radius: Radius.circular(notchRadius), clockwise: false)
       ..quadraticBezierTo(p[4].dx, p[4].dy, p[5].dx, p[5].dy)
       ..lineTo(host.right - rightCornerRadius, host.top)
       ..arcToPoint(

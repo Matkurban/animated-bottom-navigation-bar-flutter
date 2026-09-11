@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:circular_reveal_animation/circular_reveal_animation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:lanarsnavbarflutter/theme/app_theme.dart';
 import 'package:lanarsnavbarflutter/theme/custom_colors_theme.dart';
@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
@@ -46,25 +46,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late CurvedAnimation borderRadiusCurve;
   late AnimationController _hideBottomBarAnimationController;
 
-  final iconList = <IconData>[
-    Icons.brightness_5,
-    Icons.brightness_4,
-    Icons.brightness_6,
-    Icons.brightness_7,
-  ];
+  final iconList = <IconData>[Icons.brightness_5, Icons.brightness_4, Icons.brightness_6, Icons.brightness_7];
 
   @override
   void initState() {
     super.initState();
 
-    _fabAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
-      vsync: this,
-    );
-    _borderRadiusAnimationController = AnimationController(
-      duration: Duration(milliseconds: 500),
-      vsync: this,
-    );
+    _fabAnimationController = AnimationController(duration: Duration(milliseconds: 500), vsync: this);
+    _borderRadiusAnimationController = AnimationController(duration: Duration(milliseconds: 500), vsync: this);
     fabCurve = CurvedAnimation(
       parent: _fabAnimationController,
       curve: Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
@@ -75,23 +64,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
 
     fabAnimation = Tween<double>(begin: 0, end: 1).animate(fabCurve);
-    borderRadiusAnimation = Tween<double>(begin: 0, end: 1).animate(
-      borderRadiusCurve,
-    );
+    borderRadiusAnimation = Tween<double>(begin: 0, end: 1).animate(borderRadiusCurve);
 
-    _hideBottomBarAnimationController = AnimationController(
-      duration: Duration(milliseconds: 200),
-      vsync: this,
-    );
+    _hideBottomBarAnimationController = AnimationController(duration: Duration(milliseconds: 200), vsync: this);
 
-    Future.delayed(
-      Duration(seconds: 1),
-      () => _fabAnimationController.forward(),
-    );
-    Future.delayed(
-      Duration(seconds: 1),
-      () => _borderRadiusAnimationController.forward(),
-    );
+    Future.delayed(Duration(seconds: 1), () => _fabAnimationController.forward());
+    Future.delayed(Duration(seconds: 1), () => _borderRadiusAnimationController.forward());
   }
 
   bool onScrollNotification(ScrollNotification notification) {
@@ -118,20 +96,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       extendBody: true,
       appBar: AppBar(
-        title: Text(
-          widget.title,
-          style: TextStyle(color: Colors.white),
-        ),
+        title: Text(widget.title, style: TextStyle(color: Colors.white)),
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: onScrollNotification,
         child: NavigationScreen(iconList[_bottomNavIndex]),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.brightness_3,
-          color: AppTheme.colorGray,
-        ),
+        child: Icon(Icons.brightness_3, color: AppTheme.colorGray),
         onPressed: () {
           _fabAnimationController.reset();
           _borderRadiusAnimationController.reset();
@@ -148,11 +120,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                iconList[index],
-                size: 24,
-                color: color,
-              ),
+              Icon(iconList[index], size: 24, color: color),
               const SizedBox(height: 4),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -162,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   style: TextStyle(color: color),
                   group: autoSizeGroup,
                 ),
-              )
+              ),
             ],
           );
         },
@@ -194,7 +162,7 @@ class NavigationScreen extends StatefulWidget {
   const NavigationScreen(this.iconData, {super.key});
 
   @override
-  _NavigationScreenState createState() => _NavigationScreenState();
+  State<NavigationScreen> createState() => _NavigationScreenState();
 }
 
 class _NavigationScreenState extends State<NavigationScreen> with TickerProviderStateMixin {
@@ -211,27 +179,15 @@ class _NavigationScreenState extends State<NavigationScreen> with TickerProvider
 
   @override
   void initState() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
+    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 1000));
+    animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
     super.initState();
   }
 
   void _startAnimation() {
-    _controller = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    );
-    animation = CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeIn,
-    );
+    _controller = AnimationController(vsync: this, duration: Duration(milliseconds: 1000));
+    animation = CurvedAnimation(parent: _controller, curve: Curves.easeIn);
     _controller.forward();
   }
 
@@ -254,11 +210,7 @@ class _NavigationScreenState extends State<NavigationScreen> with TickerProvider
               animation: animation,
               centerOffset: Offset(80, 80),
               maxRadius: MediaQuery.of(context).size.longestSide * 1.1,
-              child: Icon(
-                widget.iconData,
-                color: colors.activeNavigationBarColor,
-                size: 160,
-              ),
+              child: Icon(widget.iconData, color: colors.activeNavigationBarColor, size: 160),
             ),
           ),
         ],

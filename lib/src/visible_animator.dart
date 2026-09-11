@@ -1,12 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class VisibleAnimator extends StatefulWidget {
-  const VisibleAnimator({
-    super.key,
-    required this.child,
-    required this.showController,
-    required this.curve,
-  });
+  const VisibleAnimator({super.key, required this.child, required this.showController, required this.curve});
 
   final Widget child;
   final Curve curve;
@@ -23,17 +18,14 @@ class _VisibleAnimatorState extends State<VisibleAnimator> {
   @override
   void initState() {
     super.initState();
-    _animation = Tween<double>(begin: 1, end: 0).animate(
-      CurvedAnimation(parent: widget.showController, curve: widget.curve),
-    );
+    _animation = Tween<double>(
+      begin: 1,
+      end: 0,
+    ).animate(CurvedAnimation(parent: widget.showController, curve: widget.curve));
   }
 
   @override
   Widget build(BuildContext context) {
-    return SizeTransition(
-      axisAlignment: -1,
-      sizeFactor: _animation,
-      child: widget.child,
-    );
+    return SizeTransition(alignment: Alignment.topCenter, sizeFactor: _animation, child: widget.child);
   }
 }

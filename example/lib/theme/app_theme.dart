@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'custom_colors_theme.dart';
 
@@ -16,23 +16,17 @@ class AppTheme {
           activeNavigationBarColor: isLight ? Colors.yellow : colorOrange,
           notActiveNavigationBarColor: Colors.white,
           shadowNavigationBarColor: isLight ? Colors.blue : colorOrange,
-        )
+        ),
       ],
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: isLight ? Colors.yellow : colorOrange,
-      ),
-      appBarTheme: AppBarTheme(
-        backgroundColor: isLight ? Colors.blue : colorGray,
-      ),
-      colorScheme: base.colorScheme.copyWith(
-        surface: isLight ? Colors.blue : colorGray,
-      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: isLight ? Colors.yellow : colorOrange),
+      appBarTheme: AppBarTheme(backgroundColor: isLight ? Colors.blue : colorGray),
+      colorScheme: base.colorScheme.copyWith(surface: isLight ? Colors.blue : colorGray),
     );
   }
 }
 
 class HexColor extends Color {
-  HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
+  HexColor(String hexColor) : super(_getColorFromHex(hexColor));
 
   static int _getColorFromHex(String hexColor) {
     hexColor = hexColor.toUpperCase().replaceAll('#', '');

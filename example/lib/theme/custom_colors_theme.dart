@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 @immutable
 class CustomColorsTheme extends ThemeExtension<CustomColorsTheme> {
@@ -34,17 +34,14 @@ class CustomColorsTheme extends ThemeExtension<CustomColorsTheme> {
   }
 
   @override
-  CustomColorsTheme lerp(
-    ThemeExtension<CustomColorsTheme>? other,
-    double t,
-  ) {
+  CustomColorsTheme lerp(ThemeExtension<CustomColorsTheme>? other, double t) {
     if (other is! CustomColorsTheme) {
       return this;
     }
     return CustomColorsTheme(
       bottomNavigationBarBackgroundColor:
           Color.lerp(bottomNavigationBarBackgroundColor, other.bottomNavigationBarBackgroundColor, t) ??
-              bottomNavigationBarBackgroundColor,
+          bottomNavigationBarBackgroundColor,
       colorLabelColor: Color.lerp(colorLabelColor, other.colorLabelColor, t) ?? colorLabelColor,
       activeNavigationBarColor:
           Color.lerp(activeNavigationBarColor, other.activeNavigationBarColor, t) ?? activeNavigationBarColor,

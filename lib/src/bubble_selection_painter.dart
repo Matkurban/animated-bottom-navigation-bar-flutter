@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class BubblePainter extends CustomPainter {
   final double bubbleRadius;
@@ -6,12 +6,9 @@ class BubblePainter extends CustomPainter {
   final Color? bubbleColor;
   final Color? endColor;
 
-  BubblePainter({
-    required this.bubbleRadius,
-    required this.maxBubbleRadius,
-    this.bubbleColor = Colors.purple,
-  })  : endColor = Color.lerp(bubbleColor, Colors.white, 0.8),
-        super();
+  BubblePainter({required this.bubbleRadius, required this.maxBubbleRadius, this.bubbleColor = Colors.purple})
+    : endColor = Color.lerp(bubbleColor, Colors.white, 0.8),
+      super();
 
   @override
   void paint(Canvas canvas, Size size) {

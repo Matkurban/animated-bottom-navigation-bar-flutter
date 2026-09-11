@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CircularNotchedAndCorneredRectangleClipper extends CustomClipper<Path> {
   final ValueListenable<ScaffoldGeometry> geometry;
@@ -22,10 +22,7 @@ class CircularNotchedAndCorneredRectangleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final notchArea = _resolveNotchArea();
 
-    return shape.getOuterPath(
-      Offset.zero & size,
-      notchArea?.inflate(notchMargin),
-    );
+    return shape.getOuterPath(Offset.zero & size, notchArea?.inflate(notchMargin));
   }
 
   Rect? _resolveNotchArea() {
@@ -37,15 +34,9 @@ class CircularNotchedAndCorneredRectangleClipper extends CustomClipper<Path> {
       Rect? notchArea;
 
       if (navigationBarOffset == null) {
-        notchArea = buttonArea?.translate(
-          0.0,
-          geometryValue.bottomNavigationBarTop! * -1.0,
-        );
+        notchArea = buttonArea?.translate(0.0, geometryValue.bottomNavigationBarTop! * -1.0);
       } else {
-        notchArea = buttonArea?.translate(
-          navigationBarOffset.dx * -1.0,
-          navigationBarOffset.dy * -1.0,
-        );
+        notchArea = buttonArea?.translate(navigationBarOffset.dx * -1.0, navigationBarOffset.dy * -1.0);
       }
       notchAreaCache.update(notchArea);
 
@@ -66,10 +57,7 @@ class CircularNotchedAndCorneredRectangleClipper extends CustomClipper<Path> {
       return null;
     }
 
-    return navigationBarObject.localToGlobal(
-      Offset.zero,
-      ancestor: scaffoldObject,
-    );
+    return navigationBarObject.localToGlobal(Offset.zero, ancestor: scaffoldObject);
   }
 
   @override
